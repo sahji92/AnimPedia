@@ -1,60 +1,66 @@
 package com.anim.animpedia;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
+import java.util.List;
 
-   private LinearLayout mammelsLayout,fishLayout,birdsLayout,amphibianslayout,reptileslayout,arthropodsLayout;
-    @Override
+public class MainActivity extends AppCompatActivity {
+
+   List<Animal> animals;
+
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mammelsLayout=findViewById(R.id.mammelsLayout);
-        fishLayout=findViewById(R.id.fishlayout);
-        birdsLayout=findViewById(R.id.birdsLayout);
-        amphibianslayout=findViewById(R.id.amphibiansLayout);
-        reptileslayout=findViewById(R.id.reptilsLayout);
-        arthropodsLayout=findViewById(R.id.arthropodsLayout);
-        mammelsLayout.setOnClickListener(this);
-        fishLayout.setOnClickListener(this);
-        birdsLayout.setOnClickListener(this);
-        amphibianslayout.setOnClickListener(this);
-        reptileslayout.setOnClickListener(this);
-        arthropodsLayout.setOnClickListener(this);
+        setContentView(R.layout.grid_recycler_activity);
+
+        animals = new ArrayList<>();
+        animals.add(new Animal("Amphibians",R.drawable.amphibians));
+        animals.add(new Animal("Arthropods",R.drawable.arthropods));
+        animals.add(new Animal("Birds",R.drawable.bird));
+        animals.add(new Animal("Fishes",R.drawable.fish));
+        animals.add(new Animal("Mammals",R.drawable.mammels));
+        animals.add(new Animal("Reptiles",R.drawable.reptiles));
+
+       RecyclerView recyclerView = findViewById(R.id.startingRecyclerViewGrid);
+       RecyclerViewAdapter adapter = new RecyclerViewAdapter(this,animals);
+       recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+       recyclerView.setAdapter(adapter);
+
+       adapter.setOnItemClickListener(new RecyclerViewAdapter.ClickListener() {
+           @Override
+           public void onItemClick(int position, View v) {
+               Intent intent=new Intent(getApplicationContext(),AnimalsActivity.class);
+               switch(position){
+                   case 4:
+                       intent.putExtra("category","mammels");
+                       break;
+                   case 3:
+                       intent.putExtra("category","fish");
+                       break;
+                   case 2:
+                       intent.putExtra("category","birds");
+                       break;
+                   case 0:
+                       intent.putExtra("category","amphibians");
+                       break;
+                   case 5:
+                       intent.putExtra("category","reptiles");
+                       break;
+                   case 1:
+                       intent.putExtra("category","arthropods");
+                       break;
+               }
+               startActivity(intent);
+           }
+       });
     }
 
-    @Override
-    public void onClick(View view) {
-        Intent intent=new Intent(this,AnimalsActivity.class);
-        switch(view.getId()){
-            case R.id.mammelsLayout:
-                intent.putExtra("category","mammels");
-                break;
-            case R.id.fishlayout:
-                intent.putExtra("category","fish");
-                break;
-            case R.id.birdsLayout:
-                intent.putExtra("category","birds");
-                break;
-            case R.id.amphibiansLayout:
-                intent.putExtra("category","amphibians");
-                break;
-            case R.id.reptilsLayout:
-                intent.putExtra("category","reptiles");
-                break;
-            case R.id.arthropodsLayout:
-                intent.putExtra("category","arthropods");
-                break;
-        }
-        startActivity(intent);
 
-    }
 }

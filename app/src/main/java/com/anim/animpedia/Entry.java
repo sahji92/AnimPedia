@@ -3,6 +3,8 @@ package com.anim.animpedia;
 public class Entry {
     private String animalName;
     private String image;
+
+
     private String description;
     private String animalSound;
 
