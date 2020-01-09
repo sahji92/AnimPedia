@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "875869827506",
+    "firebase_url": "https://animpedia-a9089.firebaseio.com",
+    "project_id": "animpedia-a9089",
+    "storage_bucket": "animpedia-a9089.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:875869827506:android:f788636f320d9ce857f4ab",
+        "android_client_info": {
+          "package_name": "com.anim.animpedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "875869827506-38k81bvaulgoth142ka8t4glss0810pp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUMNbYKqOznJqhMqPHosYwsedQsboQN18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "875869827506-38k81bvaulgoth142ka8t4glss0810pp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
