@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_dark"
+    android:background="@color/colorPrimaryBack"
     tools:context=".AnimalInfoActivity">
 
     <TextView
@@ -21,12 +21,12 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circulerImage"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
         android:layout_marginTop="8dp"
-        app:civ_border_color="#ff6d00"
+        app:civ_border_color="@color/colorPrimary"
         app:civ_border_overlay="false"
-        app:civ_border_width="4dp"
+        app:civ_border_width="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +38,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="#ff6d00"
+        android:background="@color/colorPrimary"
         android:fadeScrollbars="false"
         android:isScrollContainer="false"
         android:keepScreenOn="false"

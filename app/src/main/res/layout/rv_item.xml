@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/animalItem"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="100dp"
+    app:cardCornerRadius="7dp"
+    app:cardElevation="4dp"
     android:layout_marginBottom="3dp"
-    android:background="@android:color/holo_orange_dark"
-    android:orientation="horizontal">
+   >
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/animalImage"
+    <LinearLayout
+        android:id="@+id/animalItem"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="horizontal"
+        android:layout_marginBottom="3dp"
+        android:background="@color/colorPrimary">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.3" />
+        android:layout_weight="0.3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardHolder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:elevation="5dp"
+        app:layout_constraintDimensionRatio="1:1"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/animalImage"
+            android:layout_width="match_parent"
+            android:scaleType="centerCrop"
+            android:layout_height="match_parent"/>
+
+    </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:id="@+id/animalName"
@@ -25,3 +61,4 @@
         android:textStyle="bold" />
 
 </LinearLayout>
+</androidx.cardview.widget.CardView>

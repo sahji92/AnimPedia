@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_animal_info);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         circulerImageView=findViewById(R.id.circulerImage);
         aName=findViewById(R.id.aName);
         description=findViewById(R.id.des);
