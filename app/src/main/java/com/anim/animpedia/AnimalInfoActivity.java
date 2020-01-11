@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.io.IOException;
 
@@ -31,13 +32,14 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
         circulerImageView=findViewById(R.id.circulerImage);
         aName=findViewById(R.id.aName);
         description=findViewById(R.id.des);
-        Intent intent=getIntent();
+        final Intent intent=getIntent();
         String animalName=intent.getStringExtra("animalName");
-        String imageUrl=intent.getStringExtra("imgUrl");
+        final String imageUrl=intent.getStringExtra("imgUrl");
         String des=intent.getStringExtra("description");
         final String soundUrl=intent.getStringExtra("soundUrl");
         aName.setText(animalName);
-        Glide.with(this).load(imageUrl).fitCenter().into(circulerImageView);
+        Glide.with(this).load(imageUrl).diskCacheStrategy(DiskCacheStrategy.ALL) //using to load into cache then second time it will load fast.
+                .into(circulerImageView);
         description.setText(des);
         description.setMovementMethod(new ScrollingMovementMethod());
         mediaPlayer=new MediaPlayer();
@@ -58,6 +60,9 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
                 }
                 else{
                     onPrepared(mediaPlayer);
+                    Intent intent1=new Intent(AnimalInfoActivity.this,FullImageActivity.class);
+                    intent1.putExtra("pUrl",imageUrl);
+                    startActivity(intent1);
                 }
             }
         });
