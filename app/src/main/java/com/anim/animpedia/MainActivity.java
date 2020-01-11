@@ -1,13 +1,13 @@
 package com.anim.animpedia;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         animals.add(new Animal("Amphibians", R.drawable.amphibians));
         animals.add(new Animal("Arthropods", R.drawable.arthropods));
         animals.add(new Animal("Birds", R.drawable.bird));
-        animals.add(new Animal("Fishes", R.drawable.fish));
+        animals.add(new Animal("Sea Animals", R.drawable.fish));
         animals.add(new Animal("Mammals", R.drawable.mammels));
         animals.add(new Animal("Reptiles", R.drawable.reptiles));
 
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         intent.putExtra("category", "mammels");
                         break;
                     case 3:
-                        intent.putExtra("category", "fish");
+                        intent.putExtra("category", "seaAnimals");
                         break;
                     case 2:
                         intent.putExtra("category", "birds");

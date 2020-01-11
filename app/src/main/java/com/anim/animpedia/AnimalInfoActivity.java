@@ -1,20 +1,17 @@
 package com.anim.animpedia;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
-import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 
@@ -24,6 +21,7 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
     private CircleImageView circulerImageView;
     private TextView aName;
     private TextView description;
+    MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,19 +40,25 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
         Glide.with(this).load(imageUrl).fitCenter().into(circulerImageView);
         description.setText(des);
         description.setMovementMethod(new ScrollingMovementMethod());
-        final MediaPlayer mediaPlayer=new MediaPlayer();
+        mediaPlayer=new MediaPlayer();
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        try {
+            mediaPlayer.setDataSource(soundUrl);
+            mediaPlayer.setOnPreparedListener(AnimalInfoActivity.this);
+            mediaPlayer.prepareAsync();
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
         circulerImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                 try {
-                     mediaPlayer.setDataSource(soundUrl);
-                     mediaPlayer.setOnPreparedListener(AnimalInfoActivity.this);
-                     mediaPlayer.prepareAsync();
-                 }
-                 catch (IOException e){
-                     e.printStackTrace();
-                 }
+                if(mediaPlayer.isPlaying()){
+                    mediaPlayer.pause();
+                }
+                else{
+                    onPrepared(mediaPlayer);
+                }
             }
         });
 
@@ -63,5 +67,11 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
     @Override
     public void onPrepared(MediaPlayer mp) {
         mp.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        mediaPlayer.stop();
     }
 }
