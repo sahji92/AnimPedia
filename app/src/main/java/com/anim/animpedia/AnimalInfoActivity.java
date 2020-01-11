@@ -55,17 +55,20 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
         circulerImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mediaPlayer.isPlaying()){
-                    mediaPlayer.pause();
-                }
-                else{
                     onPrepared(mediaPlayer);
                     Intent intent1=new Intent(AnimalInfoActivity.this,FullImageActivity.class);
                     intent1.putExtra("pUrl",imageUrl);
                     startActivity(intent1);
-                }
             }
         });
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+        }
 
     }
 
@@ -74,9 +77,4 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
         mp.start();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        mediaPlayer.stop();
-    }
 }
