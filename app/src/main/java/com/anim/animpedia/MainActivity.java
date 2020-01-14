@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
@@ -52,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), AnimalsActivity.class);
                 switch (position) {
                     case 4:
-                        intent.putExtra("category", "mammels");
+                        intent.putExtra("category", "mammals");
                         break;
                     case 3:
                         intent.putExtra("category", "seaAnimals");
