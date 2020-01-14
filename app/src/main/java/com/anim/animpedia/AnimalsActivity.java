@@ -33,7 +33,6 @@ public class AnimalsActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
     private ArrayList<Entry> entries;
-    private String animalCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,13 +40,14 @@ public class AnimalsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_animals);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-//        final ProgressDialog dialog = new ProgressDialog(this);
-//        dialog.setMessage("getting Animals");
-//        dialog.show();
         textView = findViewById(R.id.textView);
         String animalCategory = getIntent().getStringExtra("category");
-        String firstLetterInCapital = animalCategory.substring(0, 1).toUpperCase();
-        textView.setText(firstLetterInCapital + animalCategory.substring(1));
+        if (animalCategory.toLowerCase().contains("sea")) {
+            textView.setText("Sea Animals");
+        } else {
+            String firstLetterInCapital = animalCategory.substring(0, 1).toUpperCase();
+            textView.setText(firstLetterInCapital + animalCategory.substring(1));
+        }
         entries = new ArrayList<>();
         recyclerView = findViewById(R.id.recyclerView);
         layoutManager = new LinearLayoutManager(this);
@@ -67,7 +67,6 @@ public class AnimalsActivity extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 recyclerView.setVisibility(View.VISIBLE);
                 findViewById(R.id.progressBar).setVisibility(View.GONE);
-//                dialog.dismiss();
             }
 
             @Override

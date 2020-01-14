@@ -16,6 +16,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 import java.io.IOException;
 
@@ -27,7 +28,7 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
     private TextView description;
     MediaPlayer mediaPlayer;
     private AdView mAdView;
-
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,11 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-4329448313558986/8737636113");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
         circulerImageView=findViewById(R.id.circulerImage);
+
         aName=findViewById(R.id.aName);
         description=findViewById(R.id.des);
         final Intent intent=getIntent();
@@ -66,6 +70,15 @@ public class AnimalInfoActivity extends AppCompatActivity implements MediaPlayer
             @Override
             public void onClick(View view) {
                     onPrepared(mediaPlayer);
+                if (mInterstitialAd.isLoaded()) {
+                    //here we check if 160 seconds from last time we showed the app until now has passed
+                    //if yes we will show the ad, if not we won't show because it would be annoying to user if
+                    //we keep showing add too often
+                    if (System.currentTimeMillis() - AdTimeTracker.LAST_TIME_AD_SEEN > 160_000) {
+                        mInterstitialAd.show();
+                        AdTimeTracker.LAST_TIME_AD_SEEN = System.currentTimeMillis();
+                    }
+                }
                     Intent intent1=new Intent(AnimalInfoActivity.this,FullImageActivity.class);
                     intent1.putExtra("pUrl",imageUrl);
                     startActivity(intent1);
